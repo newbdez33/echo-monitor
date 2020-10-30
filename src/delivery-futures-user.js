@@ -20,6 +20,11 @@ export default async function createApp() {
   socketApi.setHandler('outboundAccountInfo', (params) => logger.info(JSON.stringify(params)));
 
   // renew listenkey
+  // renew listenkey
+  setInterval(() => {
+    extendUserDataStream(APIKEY, APISECET, HTTP_BASE_URL)
+      .then(logger.info('ListenKey is renewed'));
+  }, 1000 * 60 * 45); // review the key every 45 mins
 }
 
 createApp();
