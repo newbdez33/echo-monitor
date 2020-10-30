@@ -39,9 +39,9 @@ class SocketClient {
         const message = JSON.parse(msg.data);
         if (message.e) {
           if ( message.e == "ACCOUNT_UPDATE" ) {
-            telegram(`${message.e}\n${JSON.stringify(message.a)}`);
+            telegram(`${message.e}\n${this.baseUrl}\n${JSON.stringify(message.a)}`);
           }else {
-            telegram(`${message.e}\n${JSON.stringify(message.o)}`);
+            telegram(`${message.e}\n${this.baseUrl}\n${JSON.stringify(message.o)}`);
           }
           
           console.log(message.e);
