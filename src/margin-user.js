@@ -4,6 +4,7 @@ import getUserDataStream from './lib/services/margin/getUserDataStream';
 import SocketClient from './lib/socketClient';
 import renewListenKey from './lib/helpers/renewListenKey';
 import logger from './lib/logger';
+import telegram from './lib/telegram';
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -13,7 +14,7 @@ const APISECET = process.env.APISECET;
 export default async function createApp() {
   logger.info('start application to get margin user account update');
   const listenKey = await getUserDataStream(APIKEY, APISECET);
-
+  telegram('start margin with key:' + listenKey);
   logger.info('key received.');
   const socketApi = new SocketClient(`ws/${listenKey}`);
   socketApi.setHandler('executionReport', (params) => logger.info(params));
