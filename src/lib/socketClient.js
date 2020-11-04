@@ -1,4 +1,5 @@
 import WebSocket from 'ws';
+import accountReporter from './accountReporter';
 import logger from './logger';
 import telegram from './telegram';
 
@@ -39,7 +40,8 @@ class SocketClient {
         const message = JSON.parse(msg.data);
         if (message.e) {
           if ( message.e == "ACCOUNT_UPDATE" ) {
-            telegram(`${message.e}\n${this.baseUrl}\n${JSON.stringify(message.a)}`);
+            let m = accountReporter(message.a);
+            telegram(`${message.e}\n${this.baseUrl}\n${m}`);
           }else {
             telegram(`${message.e}\n${this.baseUrl}\n${JSON.stringify(message.o)}`);
           }

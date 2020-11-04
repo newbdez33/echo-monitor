@@ -9,6 +9,6 @@ const telegram = function(msg) {
     fetch(url)
     .then(res => res.json())
     .then(json => console.log(json));
-  }
+}
 
-  export default telegram;
+export default telegram;
